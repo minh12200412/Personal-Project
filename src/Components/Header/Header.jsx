@@ -4,25 +4,28 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="">Duc Minh Code</Navbar.Brand>
+        {/* <Navbar.Brand href="">Duc Minh Code</Navbar.Brand> */}
+        <NavLink className="navbar-brand" to="/">
+          Duc Minh Code
+        </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link className="nav-link" to="/">
+            <NavLink className="nav-link" to="/">
               Home
-            </Link>
-            <Link className="nav-link" to="/users">
+            </NavLink>
+            <NavLink className="nav-link" to="/users">
               User
-            </Link>
-            <Link className="nav-link" to="/admins">
+            </NavLink>
+            <NavLink className="nav-link" to="/admins">
               Admin
-            </Link>
+            </NavLink>
           </Nav>
           <Nav className="me-auto">
             <Form className="d-flex">

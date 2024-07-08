@@ -2,3 +2,14 @@ body {
   padding: 0;
   margin: 0;
 }
+.App-container {
+  .header-container {
+    .navbar-nav {
+      .nav-link {
+        &.active {
+          color: #00bfff;
+        }
+      }
+    }
+  }
+}
