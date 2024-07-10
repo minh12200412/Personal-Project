@@ -2,11 +2,41 @@ body {
   padding: 0;
   margin: 0;
 }
+@media (min-width: 1450px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1400px !important;
+  }
+}
 .App-container {
   .header-container {
-    .navbar-nav {
+    .btn-login {
+      // border-radius: 5px;
+      margin-right: 15px;
+      padding: 0 15px;
+      // border: 1px solid rgb(30, 152, 204);
+      // color: rgb(30, 152, 204);
+      &:hover {
+        box-shadow: 0 0 0 3px #198754;
+      }
+    }
+
+    .btn-signUp {
+      background-color: #198754;
+      color: aliceblue;
+      &:hover {
+        box-shadow: 0 0 0 3px #198754;
+      }
+    }
+    .navbar {
+      padding-top: 20px;
       z-index: 10;
-      opacity: 0.6;
+      // opacity: 0.6;
+      background-color: rgba(0, 0, 0, 0) !important;
       .nav-link {
         &.active {
           color: #00bfff;
@@ -15,7 +45,53 @@ body {
     }
   }
 }
-video {
-  position: fixed;
-  width: 100vw;
+
+.homepage-container {
+  video {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+  }
+  .homepage-contents {
+    margin-top: 100px;
+    position: relative;
+    padding: 0 100px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    // gap: 20px;
+    @media (min-width: 1280px) {
+      h1 {
+        font-size: 80px;
+        letter-spacing: -0.02em;
+        line-height: 1;
+      }
+    }
+    p {
+      margin-top: 32px;
+      font-weight: 400;
+    }
+    @media (min-width: 1280px) {
+      p {
+        font-size: 24px;
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+      }
+    }
+    @media (min-width: 720px) {
+      .block-btn {
+        gap: 8px;
+      }
+    }
+    @media (min-width: 360px) {
+      .block-btn {
+        width: auto;
+      }
+    }
+    .block-btn {
+      .btn-homepage {
+        padding: 5 15px;
+      }
+    }
+  }
 }

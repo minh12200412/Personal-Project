@@ -11,8 +11,8 @@ const Header = () => {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         {/* <Navbar.Brand href="">Duc Minh Code</Navbar.Brand> */}
-        <NavLink className="navbar-brand" to="/">
-          Duc Minh Code
+        <NavLink className="navbar-brand title-main" to="/">
+          Duc Minh
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -39,13 +39,21 @@ const Header = () => {
             </Form>
           </Nav>
           <Nav className="">
-            <NavDropdown title="Settings" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Log in</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Log out</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Profile</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Help</NavDropdown.Item>
-            </NavDropdown>
+            <Button variant="outline-success" className="btn-login">
+              Login
+            </Button>
+            {/* <button >Login</button> */}
+            <Button variant="outline-success" className="btn-signUp">
+              SignUp
+            </Button>
+            {/* <button className="btn-signUp">SignUp</button> */}
+            {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
+                <NavDropdown.Item>Log in</NavDropdown.Item>
+                <NavDropdown.Item>Log out</NavDropdown.Item>
+                <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item>Help</NavDropdown.Item>
+              </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>
