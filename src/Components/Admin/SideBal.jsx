@@ -1,4 +1,6 @@
 import React from "react";
+import "./SideBal.scss";
+import { FaDragon } from "react-icons/fa";
 import {
   ProSidebar,
   Menu,
@@ -43,6 +45,7 @@ const SideBal = (props) => {
               whiteSpace: "nowrap",
             }}
           >
+            <FaDragon className="FaDragon" size={"2em"} color={"00bfff"} />
             Duc Minh Code
           </div>
         </SidebarHeader>
@@ -51,20 +54,22 @@ const SideBal = (props) => {
           <Menu iconShape="circle">
             <MenuItem
               icon={<FaTachometerAlt />}
-              suffix={<span className="badge red">New</span>}
+              suffix={<span className="badge red">Main</span>}
             >
-              dashboard
+              Dashboard
             </MenuItem>
-            <MenuItem icon={<FaGem />}> components </MenuItem>
+            {/* <MenuItem icon={<FaGem />}> components </MenuItem> */}
           </Menu>
           <Menu iconShape="circle">
             <SubMenu
-              suffix={<span className="badge yellow">3</span>}
-              icon={<FaRegLaughWink />}
+              // suffix={<span className="badge yellow">3</span>}
+              // icon={<FaRegLaughWink />}
+              icon={<FaGem />}
+              title="Features"
             >
-              <MenuItem> 1</MenuItem>
-              <MenuItem> 2</MenuItem>
-              <MenuItem> 3</MenuItem>
+              <MenuItem> Quản lý User</MenuItem>
+              <MenuItem> Quản lý bài Quiz</MenuItem>
+              <MenuItem> Quản lý câu Hỏi</MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>
@@ -77,7 +82,7 @@ const SideBal = (props) => {
             }}
           >
             <a
-              href="https://github.com/azouaoui-med/react-pro-sidebar"
+              href="https://www.facebook.com/ducminh2004/"
               target="_blank"
               className="sidebar-btn"
               rel="noopener noreferrer"
@@ -90,7 +95,7 @@ const SideBal = (props) => {
                   overflow: "hidden",
                 }}
               >
-                viewSource
+                DucMinhCode
               </span>
             </a>
           </div>
