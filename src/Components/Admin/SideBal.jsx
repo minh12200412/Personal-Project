@@ -21,6 +21,7 @@ import {
 } from "react-icons/fa";
 import sidebarBg from "../../Assets/bg2.jpg";
 import "react-pro-sidebar/dist/css/styles.css";
+import { Link } from "react-router-dom";
 const SideBal = (props) => {
   const { image, collapsed, toggled, handleToggleSidebar } = props;
   return (
@@ -57,6 +58,7 @@ const SideBal = (props) => {
               suffix={<span className="badge red">Main</span>}
             >
               Dashboard
+              <Link to="/admins" />
             </MenuItem>
             {/* <MenuItem icon={<FaGem />}> components </MenuItem> */}
           </Menu>
@@ -67,7 +69,10 @@ const SideBal = (props) => {
               icon={<FaGem />}
               title="Features"
             >
-              <MenuItem> Quản lý User</MenuItem>
+              <MenuItem>
+                {" "}
+                Quản lý User <Link to="/admins/manager-user" />
+              </MenuItem>
               <MenuItem> Quản lý bài Quiz</MenuItem>
               <MenuItem> Quản lý câu Hỏi</MenuItem>
             </SubMenu>
