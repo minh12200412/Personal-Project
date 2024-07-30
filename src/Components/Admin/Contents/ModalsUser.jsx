@@ -1,14 +1,22 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import "./ModalsUser.scss";
 import { FcAddImage } from "react-icons/fc";
-
-function Example() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+import axios from "axios";
+function Example(props) {
+  const { show, setShow } = props;
+  // const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setEmail("");
+    setPassword("");
+    setUsername("");
+    setRole("USER");
+    setImage("");
+    setShow(false);
+    setPreviewImg("");
+  };
+  // const handleShow = () => setShow(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -23,12 +31,31 @@ function Example() {
       setPreviewImg("");
     }
   };
+  const handCreateNewUser = async () => {
+    // let dataUser = {
+    //   email: email,
+    //   password: password,
+    //   username: username,
+    //   role: role,
+    //   image: image,
+    // };
+    // console.log(dataUser);
+
+    // const FormData = require("form-data");
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    data.append("username", username);
+    data.append("role", role);
+    data.append("userImage", image);
+    let res = await axios.post(
+      "http://localhost:8081/api/v1/participant",
+      data
+    );
+    console.log(res);
+  };
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
       <Modal
         show={show}
         onHide={handleClose}
@@ -92,6 +119,7 @@ function Example() {
                 onChange={(even) => {
                   setRole(even.target.value);
                 }}
+                value={role}
               >
                 <option value="USER">User</option>
                 <option value="ADMIN">Admin</option>
@@ -127,7 +155,12 @@ function Example() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handCreateNewUser();
+            }}
+          >
             Save Changes
           </Button>
         </Modal.Footer>

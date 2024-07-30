@@ -1,5 +1,17 @@
 .manager-user-container {
+  padding: 10px 5px;
+  .title {
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
   .user-contents {
+    .btn-add {
+      gap: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 0;
+    }
   }
 }
 .ModalAddUser {
