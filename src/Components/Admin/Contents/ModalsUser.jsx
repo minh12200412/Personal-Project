@@ -64,6 +64,7 @@ function Example(props) {
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
+      props.fetchListUsers();
     } else {
       toast.error(data.EM);
     }
