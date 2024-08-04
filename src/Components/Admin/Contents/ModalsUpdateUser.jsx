@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import "./ModalsUser.scss";
 import { FcAddImage } from "react-icons/fc";
 import { toast } from "react-toastify";
-import { postCreateNewUser } from "../../../Services/ApiServices";
+import { putUpdateUser } from "../../../Services/ApiServices";
+import _ from "lodash";
 
 function Example(props) {
-  const { show, setShow } = props;
+  const { show, setShow, DataUpdate } = props;
   // const [show, setShow] = useState(false);
   const handleClose = () => {
     setEmail("");
@@ -17,7 +18,9 @@ function Example(props) {
     setImage("");
     setShow(false);
     setPreviewImg("");
+    props.resetData();
   };
+
   // const handleShow = () => setShow(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +28,17 @@ function Example(props) {
   const [role, setRole] = useState("USER");
   const [image, setImage] = useState("");
   const [previewImg, setPreviewImg] = useState("");
-
+  useEffect(() => {
+    if (!_.isEmpty(DataUpdate)) {
+      setEmail(DataUpdate.email);
+      setUsername(DataUpdate.username);
+      setRole(DataUpdate.role);
+      setImage("");
+      if (DataUpdate.image) {
+        setPreviewImg(`data:image/jpeg;base64,${DataUpdate.image}`);
+      }
+    }
+  }, [DataUpdate]);
   const handleUploadFile = (even) => {
     if (even.target && even.target.files && even.target.files[0]) {
       setImage(even.target.files[0]);
@@ -34,38 +47,12 @@ function Example(props) {
       setPreviewImg("");
     }
   };
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
   const handCreateNewUser = async () => {
-    let isValidateEmail = validateEmail(email);
-    // let dataUser = {
-    //   email: email,
-    //   password: password,
-    //   username: username,
-    //   role: role,
-    //   image: image,
-    // };
-    // console.log(dataUser);
-
-    // const FormData = require("form-data");
-    if (!isValidateEmail) {
-      toast.error("🦄 Invalid Email!");
-      return;
-    }
-    if (!password) {
-      toast.error("🦄 Invalid Password");
-      return;
-    }
-    let data = await postCreateNewUser(email, password, username, role, image);
+    let data = await putUpdateUser(DataUpdate.id, username, role, image);
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
-      props.fetchListUsers();
+      await props.fetchListUsers();
     } else {
       toast.error(data.EM);
     }
@@ -80,7 +67,7 @@ function Example(props) {
         className="ModalAddUser"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add new user</Modal.Title>
+          <Modal.Title>Update a user</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="row g-3">
@@ -92,6 +79,7 @@ function Example(props) {
                 type="email"
                 className="form-control"
                 value={email}
+                disabled
                 onChange={(even) => {
                   setEmail(even.target.value);
                 }}
@@ -105,6 +93,7 @@ function Example(props) {
                 type="password"
                 className="form-control"
                 value={password}
+                disabled
                 onChange={(even) => {
                   setPassword(even.target.value);
                 }}
