@@ -6,12 +6,16 @@ import Button from "react-bootstrap/Button";
 import "./ManagerUser.scss";
 import { FcPlus } from "react-icons/fc";
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../../../Services/ApiServices";
+import {
+  getAllUsers,
+  getUsersWithPaginate,
+} from "../../../Services/ApiServices";
 import TableUser from "./TableUser";
+import TableUserPaginate from "./TableUserPaginate";
 
 const ManagerUser = (props) => {
   useEffect(() => {
-    fetchListUsers();
+    fetchListUsersWithPaginate(1);
   }, []);
   const fetchListUsers = async () => {
     let data = await getAllUsers();
@@ -19,6 +23,16 @@ const ManagerUser = (props) => {
       SetListUser(data.DT);
     }
   };
+  const fetchListUsersWithPaginate = async (page) => {
+    let data = await getUsersWithPaginate(page, LIMIT_USER);
+    if (data.EC === 0) {
+      console.log(data.DT);
+      SetListUser(data.DT.users);
+      setPageCount(data.DT.totalPages);
+    }
+  };
+  const [pageCount, setPageCount] = useState(0);
+  const LIMIT_USER = 6;
   const [listUser, SetListUser] = useState([]);
   const [ShowModalCreateUser, SetShowModalCreateUser] = useState(false);
   const [ShowModalUpdateUser, SetShowModalUpdateUser] = useState(false);
@@ -59,11 +73,19 @@ const ManagerUser = (props) => {
           />
         </div>
         <div className="table-user">
-          <TableUser
+          {/* <TableUser
             listUser={listUser}
             handleClickUpdateUser={handleClickUpdateUser}
             handleClickViewUser={handleClickViewUser}
             handleClickDelete={handleClickDelete}
+          /> */}
+          <TableUserPaginate
+            listUser={listUser}
+            handleClickUpdateUser={handleClickUpdateUser}
+            handleClickViewUser={handleClickViewUser}
+            handleClickDelete={handleClickDelete}
+            fetchListUsersWithPaginate={fetchListUsersWithPaginate}
+            pageCount={pageCount}
           />
           <ModalsUpdateUser
             show={ShowModalUpdateUser}

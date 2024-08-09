@@ -14,6 +14,11 @@
     .admin-main {
       // height: 40px;
       border-bottom: 2npx solid aqua;
+      .user-pagePagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
     }
   }
 }
