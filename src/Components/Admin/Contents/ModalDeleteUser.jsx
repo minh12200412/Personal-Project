@@ -15,12 +15,13 @@ function Example(props) {
 
   // const handleShow = () => setShow(true);x
   const handleSubmitDeleteUser = async () => {
-    console.log(DataUpdate.id);
     let data = await deleteUsers(DataUpdate.id);
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
-      await props.fetchListUsers();
+      // await props.fetchListUsers();
+      props.setCurrentPage(1);
+      await props.fetchListUsersWithPaginate(1);
     } else {
       toast.error(data.EM);
     }

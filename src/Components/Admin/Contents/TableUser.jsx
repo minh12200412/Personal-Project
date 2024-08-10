@@ -2,7 +2,7 @@ const TableUser = (props) => {
   const { listUser } = props;
   return (
     <>
-      <table class="table table-hover table-bordered">
+      <table class="table table-hover table-bordered ">
         <thead class="table-dark">
           <tr>
             <th scope="col">ID</th>
