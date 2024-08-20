@@ -13,11 +13,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postLogin, postSignUp } from "../../Services/ApiServices";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { doLogin } from "../../redux/action/userAction";
 const SignUp = (props) => {
-  const disPatch = useDispatch();
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
   };
@@ -37,7 +34,6 @@ const SignUp = (props) => {
     e.preventDefault();
     let data = await postLogin(email, password);
     if (data && data.EC === 0) {
-      disPatch(doLogin(data));
       navigate("/");
       toast.success(data.EM);
     } else {
@@ -203,7 +199,7 @@ const SignUp = (props) => {
                 </a>
                 <a href="#" className="social-icon">
                   <i className="fab fa-twitter">
-                    <FontAwesomeIcon icon={faTwitch} />
+                    <FontAwesomeIcon icon={faGoogle} />
                   </i>
                 </a>
                 <a href="#" className="social-icon">

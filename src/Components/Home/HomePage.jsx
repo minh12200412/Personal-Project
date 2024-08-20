@@ -1,7 +1,7 @@
 import React from "react";
 import VideoHomePage from "../../Assets/Video/video-homepage.mp4";
 import Button from "react-bootstrap/Button";
-
+import { useSelectors } from "react-redux";
 const HomePage = (props) => {
   return (
     <div className="homepage-container">

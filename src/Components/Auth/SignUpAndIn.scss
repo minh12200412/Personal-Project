@@ -21,6 +21,9 @@
       display: grid;
       grid-template-columns: 1fr;
       z-index: 5;
+      span {
+        cursor: pointer;
+      }
       form {
         display: flex;
         align-items: center;
@@ -157,7 +160,7 @@
         padding: 0.7rem 0;
       }
       .btn.transparent {
-        margin: 0;
+        margin: 0 10px;
         background: none;
         border: 2px solid #fff;
         width: 130px;

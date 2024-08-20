@@ -1,38 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import { Provider } from "react-redux";
 // import store from "./app/store";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import User from "./Components/User/User";
-import Admin from "./Components/Admin/Admin";
-import HomePage from "./Components/Home/HomePage";
-import ManagerUser from "./Components/Admin/Contents/ManagerUser";
-import DashBoard from "./Components/Admin/Contents/Dashboard";
-import Login from "./Components/Auth/Login";
+
+import Layout from "./Layout";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <Provider store={store}>
-  <React.StrictMode>
+  <Provider store={store}>
+    {/* <React.StrictMode> */}
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<HomePage />} />
-          <Route path="users" element={<User />} />
-        </Route>
-        <Route path="/admins" element={<Admin />}>
-          <Route index element={<DashBoard />} />
-          <Route path="manager-user" element={<ManagerUser />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <Layout />
     </BrowserRouter>
-  </React.StrictMode>
-  // </Provider>,
+    {/* </React.StrictMode> */}
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
