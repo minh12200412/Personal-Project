@@ -13,7 +13,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postLogin, postSignUp } from "../../Services/ApiServices";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { doLogin } from "../../redux/action/userAction";
+import { ImSpinner9 } from "react-icons/im";
 const SignUp = (props) => {
+  const disPatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(!show);
@@ -34,6 +38,7 @@ const SignUp = (props) => {
     e.preventDefault();
     let data = await postLogin(email, password);
     if (data && data.EC === 0) {
+      disPatch(doLogin(data));
       navigate("/");
       toast.success(data.EM);
     } else {
@@ -118,7 +123,8 @@ const SignUp = (props) => {
               {/* <input type="submit" value="Login" className="btn solid" /> */}
               <span>Forgot password ?</span>
               <button value="Login" className="btn solid" onClick={handleLogin}>
-                Login
+                <ImSpinner9 className="loaderIcon" />
+                <span> Login</span>
               </button>
 
               <p className="social-text">Or Sign in with social platforms</p>

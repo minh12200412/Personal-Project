@@ -26,7 +26,7 @@ const putUpdateUser = (id, username, role, image) => {
   return axios.put("api/v1/participant", data);
 };
 const postLogin = (email, password) => {
-  return axios.post("api/v1/login", { email, password });
+  return axios.post("api/v1/login", { email, password, delay: 5000 });
 };
 const postSignUp = (email, password, username) => {
   return axios.post("api/v1/register", { email, password, username });

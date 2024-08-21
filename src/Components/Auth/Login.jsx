@@ -15,7 +15,9 @@ import { postLogin, postSignUp } from "../../Services/ApiServices";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
+import { ImSpinner9 } from "react-icons/im";
 const SignUp = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const disPatch = useDispatch();
   const [show, setShow] = useState(true);
   const handleShow = () => {
@@ -33,15 +35,19 @@ const SignUp = (props) => {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
+
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     let data = await postLogin(email, password);
     if (data && data.EC === 0) {
       disPatch(doLogin(data));
+      setIsLoading(false);
       navigate("/");
       toast.success(data.EM);
     } else {
       toast.error(data.EM);
+      setIsLoading(false);
     }
   };
   const handleSignUp = async (e) => {
@@ -55,6 +61,7 @@ const SignUp = (props) => {
       toast.error("🦄 Invalid Password");
       return;
     }
+
     let data = await postSignUp(emailSignUp, passwordSignUp, userName);
     if (data && data.EC === 0) {
       navigate("/login");
@@ -121,8 +128,15 @@ const SignUp = (props) => {
               </div>
               {/* <input type="submit" value="Login" className="btn solid" /> */}
               <span>Forgot password ?</span>
-              <button value="Login" className="btn solid" onClick={handleLogin}>
-                Login
+              <button
+                value="Login"
+                className="btn solid"
+                onClick={handleLogin}
+                disabled={isLoading}
+              >
+                {isLoading === true && <ImSpinner9 className="loaderIcon" />}
+
+                <span className=""> Login</span>
               </button>
 
               <p className="social-text">Or Sign in with social platforms</p>

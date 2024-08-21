@@ -113,6 +113,21 @@
           &:hover {
             background-color: #4d84e2;
           }
+          .loaderIcon {
+            font-size: 14px;
+            margin-bottom: 3px;
+            color: #00d4ff;
+            animation: spin 1s infinite linear;
+            margin-right: 3px;
+          }
+          @keyframes spin {
+            from {
+              transform: scale(1) rotate(0deg);
+            }
+            to {
+              transform: scale(1) rotate(360deg);
+            }
+          }
         }
       }
       form.sign-up-form {
