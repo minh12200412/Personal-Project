@@ -16,7 +16,9 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
 import { ImSpinner9 } from "react-icons/im";
+
 const SignUp = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
   const disPatch = useDispatch();
   const [show, setShow] = useState(false);
   const handleShow = () => {
@@ -36,12 +38,15 @@ const SignUp = (props) => {
   };
   const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     let data = await postLogin(email, password);
     if (data && data.EC === 0) {
       disPatch(doLogin(data));
+      setIsLoading(false);
       navigate("/");
       toast.success(data.EM);
     } else {
+      setIsLoading(false);
       toast.error(data.EM);
     }
   };
@@ -122,7 +127,12 @@ const SignUp = (props) => {
               </div>
               {/* <input type="submit" value="Login" className="btn solid" /> */}
               <span>Forgot password ?</span>
-              <button value="Login" className="btn solid" onClick={handleLogin}>
+              <button
+                value="Login"
+                className="btn solid"
+                onClick={handleLogin}
+                disabled={isLoading}
+              >
                 <ImSpinner9 className="loaderIcon" />
                 <span> Login</span>
               </button>
