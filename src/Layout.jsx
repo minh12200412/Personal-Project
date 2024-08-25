@@ -10,14 +10,17 @@ import Login from "./Components/Auth/Login";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SignUp from "./Components/Auth/Signup";
+import ListQuiz from "./Components/User/ListQuiz";
+import DetailQuiz from "./Components/User/DetailQuiz";
 const Layout = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
-          <Route path="users" element={<User />} />
+          <Route path="users" element={<ListQuiz />} />
         </Route>
+        <Route path="/quiz/:id" element={<DetailQuiz />} />
         <Route path="/admins" element={<Admin />}>
           <Route index element={<DashBoard />} />
           <Route path="manager-user" element={<ManagerUser />} />
