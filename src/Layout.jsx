@@ -13,6 +13,13 @@ import SignUp from "./Components/Auth/Signup";
 import ListQuiz from "./Components/User/ListQuiz";
 import DetailQuiz from "./Components/User/DetailQuiz";
 const Layout = () => {
+  const NotFound = () => {
+    return (
+      <div className="container mt-4 alert alert-danger">
+        404-Not Found data with your current URL
+      </div>
+    );
+  };
   return (
     <>
       <Routes>
@@ -27,6 +34,7 @@ const Layout = () => {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signUp" element={<SignUp />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer
         position="top-right"
