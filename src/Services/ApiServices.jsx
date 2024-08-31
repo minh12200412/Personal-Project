@@ -37,6 +37,19 @@ const getQuizByUser = () => {
 const getQuizData = (id) => {
   return axios.get(`/api/v1/questions-by-quiz?quizId=${id}`);
 };
+const postAnswerUser = async (data) => {
+  console.log("check data api", { ...data });
+  return axios.post("api/v1/quiz-submit", { ...data });
+  // try {
+  //   return await axios.post("/api/v1/quiz-submit", { ...data });
+  // } catch (error) {
+  //   console.error(
+  //     "Lỗi khi gọi API: ",
+  //     error.response ? error.response.data : error.message
+  //   );
+  //   return { EC: 1, EM: "Lỗi khi gửi dữ liệu" };
+  // }
+};
 export {
   postCreateNewUser,
   getAllUsers,
@@ -47,4 +60,5 @@ export {
   postSignUp,
   getQuizByUser,
   getQuizData,
+  postAnswerUser,
 };

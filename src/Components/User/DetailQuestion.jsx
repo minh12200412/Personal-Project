@@ -5,7 +5,6 @@ const DetailQuestion = (prop) => {
     return <></>;
   }
   const handleHandAnswers = (event, questionID, answersID) => {
-    console.log("Test :", event.target.checked);
     // console.log(questionID + answersID);
     prop.handleCheckBox(questionID, answersID);
   };
