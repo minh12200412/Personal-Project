@@ -24,8 +24,12 @@ function ResultAnswer(props) {
           <Modal.Title>Confirm delete the user ?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div>Total Question: {dataResult.countTotal}</div>
-          <div>Total Correct Question: {dataResult.countCorrect}</div>
+          <div>
+            Total Question: <b>{dataResult.countTotal}</b>
+          </div>
+          <div>
+            Total Correct Question: <b>{dataResult.countCorrect}</b>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

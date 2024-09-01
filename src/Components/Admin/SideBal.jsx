@@ -21,9 +21,11 @@ import {
 } from "react-icons/fa";
 import sidebarBg from "../../Assets/bg2.jpg";
 import "react-pro-sidebar/dist/css/styles.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const SideBal = (props) => {
   const { image, collapsed, toggled, handleToggleSidebar } = props;
+  const navigate = useNavigate();
   return (
     <>
       <ProSidebar
@@ -44,7 +46,9 @@ const SideBal = (props) => {
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
+              cursor: "pointer",
             }}
+            onClick={() => navigate("/")}
           >
             <FaDragon className="FaDragon" size={"2em"} color={"00bfff"} />
             Duc Minh Code
@@ -73,7 +77,10 @@ const SideBal = (props) => {
                 {" "}
                 Quản lý User <Link to="/admins/manager-user" />
               </MenuItem>
-              <MenuItem> Quản lý bài Quiz</MenuItem>
+              <MenuItem>
+                {" "}
+                Quản lý bài Quiz <Link to="/admins/manager-quiz" />
+              </MenuItem>
               <MenuItem> Quản lý câu Hỏi</MenuItem>
             </SubMenu>
           </Menu>
