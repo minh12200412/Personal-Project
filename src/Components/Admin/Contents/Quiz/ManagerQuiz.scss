@@ -14,7 +14,7 @@ $border-color: #e5e5e5;
     box-sizing: border-box;
     form {
       .row {
-        margin: 0 0 30px 0;
+        margin: 0;
         zoom: 1;
         &:before,
         &:after {
@@ -39,27 +39,87 @@ $border-color: #e5e5e5;
           padding-right: 10px;
           float: left;
           width: 50%;
-
           &:last-of-type {
             padding-right: 0;
+          }
+          &.option-a {
+            background-color: $primary-color;
+            border: 1px solid $border-color;
+            color: #fff;
+          }
+
+          &.option-b {
+            background-color: $secondary-color;
+            border: 1px solid $border-color;
+            color: #fff;
+          }
+
+          &.option-c {
+            background-color: lighten($input-bg, 10%);
+            border: 1px solid darken($border-color, 10%);
+            // color: $text-color;
           }
         }
         @media only screen and (max-width: 540px) {
           .col-half {
-            width: 100%;
+            // width: 100%;
             padding-right: 0;
           }
         }
         h4 {
           color: $primary-color;
         }
+        .Select__control {
+          width: 100%;
+          background-color: $input-bg;
+          border: 1px solid $border-color;
+          border-radius: 3px;
+          padding: 0.7em;
+          transition: all 0.35s ease-in-out;
+          line-height: 1.4;
+
+          &:hover {
+            border-color: $secondary-color;
+          }
+
+          &--is-focused {
+            border-color: $primary-color;
+            box-shadow: 0 0 0 1px $primary-color;
+          }
+        }
+        .Select__option {
+          background-color: $input-bg;
+          // color: $text-color;
+
+          &:hover {
+            background-color: $primary-color;
+            color: #fff;
+          }
+
+          &--is-selected {
+            background-color: $primary-color;
+            color: #fff;
+          }
+
+          &--is-focused {
+            background-color: lighten($primary-color, 10%);
+            color: #fff;
+          }
+        }
+        .Select__menu {
+          background-color: $input-bg;
+          border: 1px solid $border-color;
+        }
+
+        .Select__single-value {
+          // color: $text-color;
+        }
         .input-group {
+          .css-b62m3t-container {
+            width: 100%;
+          }
           //   padding: 0;
-          input,
-          input[type="radio"] + label,
-          input[type="checkbox"] + label:before,
-          Select option,
-          Select {
+          input {
             width: 100%;
             padding: 1em;
             line-height: 1.4;
@@ -81,90 +141,7 @@ $border-color: #e5e5e5;
               }
             }
           }
-          input[type="radio"],
-          input[type="checkbox"] {
-            display: none;
-          }
-          input[type="radio"] + label,
-          Select {
-            display: inline-block;
-            width: 50%;
-            text-align: center;
-            border-radius: 0;
-          }
-          input[type="radio"]:checked + label,
-          input:checked + label:before,
-          Select:focus,
-          Select:active {
-            background-color: $primary-color;
-            color: #fff;
-            border-color: $secondary-color;
-          }
-          input[type="checkbox"] + label {
-            position: relative;
-            display: block;
-            padding-left: 1.6em;
-
-            &:before {
-              position: absolute;
-              top: 0.2em;
-              left: 0;
-              width: 1em;
-              height: 1em;
-              content: "";
-            }
-
-            &:after {
-              position: absolute;
-              top: 0.45em;
-              left: 0.2em;
-              font-size: 0.8em;
-              color: #fff;
-              opacity: 0;
-              font-family: FontAwesome;
-              content: "\f00c";
-            }
-          }
-          input:checked + label:after {
-            opacity: 1;
-          }
-
-          Select {
-            height: 3.4em;
-            line-height: 2;
-
-            &:first-of-type {
-              border-top-left-radius: 3px;
-              border-bottom-left-radius: 3px;
-            }
-
-            &:last-of-type {
-              border-top-right-radius: 3px;
-              border-bottom-right-radius: 3px;
-            }
-
-            &:focus,
-            &:active {
-              outline: 0;
-            }
-
-            option {
-              background-color: $primary-color;
-              color: #fff;
-            }
-          }
           margin-bottom: 1em;
-          zoom: 1;
-
-          &:before,
-          &:after {
-            content: "";
-            display: table;
-          }
-
-          &:after {
-            clear: both;
-          }
 
           &-icon {
             position: relative;
