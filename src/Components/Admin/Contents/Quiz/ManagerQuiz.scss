@@ -118,8 +118,16 @@ $border-color: #e5e5e5;
           .css-b62m3t-container {
             width: 100%;
           }
+          .FaUserEdit {
+            margin-left: 20px;
+          }
+          button {
+            width: 30% !important;
+            font-weight: bold;
+          }
           //   padding: 0;
-          input {
+          input,
+          button {
             width: 100%;
             padding: 1em;
             line-height: 1.4;
