@@ -5,6 +5,9 @@ import { FaUserEdit } from "react-icons/fa";
 import { FaAudioDescription } from "react-icons/fa";
 import { MdUploadFile } from "react-icons/md";
 import { FaSave } from "react-icons/fa";
+import { postCreateNewQuiz } from "../../../../Services/ApiServices";
+import TableQuiz from "./TableQuiz";
+import Accordion from "react-bootstrap/Accordion";
 const ManagerQuiz = () => {
   const options = [
     { value: "EASY", label: "EASY", classNameName: "option-a" },
@@ -15,8 +18,10 @@ const ManagerQuiz = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [type, setType] = useState("EASY");
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    let res = await postCreateNewQuiz(description, name, type?.value, image);
+    console.log("test", res);
   };
   const handleChangeFile = (even) => {
     if (even.target && even.target.files && even.target.files[0])
@@ -25,78 +30,92 @@ const ManagerQuiz = () => {
   return (
     <div className="quiz-container">
       <div className="container-quiz">
-        <form onSubmit={(event) => handleSubmit(event)}>
-          <div className="row">
-            <h4>Manager Quiz</h4>
-            <div className="input-group input-group-icon">
-              <input
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(event) => {
-                  setName(event.preventDefault.value);
-                }}
-              />
-              <div className="input-icon">
-                <i className="fa fa-user">
-                  <FaUserEdit size={"1.4em"} className="FaUserEdit" />
-                </i>
-              </div>
-            </div>
-            <div className="input-group input-group-icon">
-              <input
-                type="email"
-                placeholder="Description"
-                value={description}
-                onChange={(event) => {
-                  setDescription(event.preventDefault.value);
-                }}
-              />
-              <div className="input-icon">
-                <i className="fa fa-envelope">
-                  <FaAudioDescription size={"1.4em"} className="FaUserEdit" />
-                </i>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-half">
-              <div className="input-group input-group-icon">
-                <input
-                  type="file"
-                  onChange={(event) => handleChangeFile(event)}
-                />
-                <div className="input-icon">
-                  <i className="fa fa-user">
-                    <MdUploadFile size={"1.6em"} />
-                  </i>
+        <Accordion defaultActiveKey="0">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>Manager Quiz</Accordion.Header>
+            <Accordion.Body>
+              <form onSubmit={(event) => handleSubmit(event)}>
+                <div className="row">
+                  <h4>Manager Quiz</h4>
+                  <div className="input-group input-group-icon">
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      value={name}
+                      onChange={(event) => {
+                        setName(event.preventDefault.value);
+                      }}
+                    />
+                    <div className="input-icon">
+                      <i className="fa fa-user">
+                        <FaUserEdit size={"1.4em"} className="FaUserEdit" />
+                      </i>
+                    </div>
+                  </div>
+                  <div className="input-group input-group-icon">
+                    <input
+                      type="email"
+                      placeholder="Description"
+                      value={description}
+                      onChange={(event) => {
+                        setDescription(event.preventDefault.value);
+                      }}
+                    />
+                    <div className="input-icon">
+                      <i className="fa fa-envelope">
+                        <FaAudioDescription
+                          size={"1.4em"}
+                          className="FaUserEdit"
+                        />
+                      </i>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="col-half">
-              <div className="input-group">
-                <Select
-                  value={type}
-                  // onChange={this.handleChange}
-                  placeholder={"Quiz type.."}
-                  options={options}
-                  classNamePrefix="Select"
-                />
-              </div>
-            </div>
-            <div className="col-half">
-              <div className="input-group input-group-icon">
-                <button>Save</button>
-                <div className="input-icon">
-                  <i className="fa fa-user">
-                    <FaSave size={"1.6em"} />
-                  </i>
+                <div className="row">
+                  <div className="col-half">
+                    <div className="input-group input-group-icon">
+                      <input
+                        type="file"
+                        onChange={(event) => handleChangeFile(event)}
+                      />
+                      <div className="input-icon">
+                        <i className="fa fa-user">
+                          <MdUploadFile size={"1.6em"} />
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-half">
+                    <div className="input-group">
+                      <Select
+                        value={type}
+                        // onChange={this.handleChange}
+                        defaultValue={type}
+                        onChange={setType}
+                        placeholder={"Quiz type.."}
+                        options={options}
+                        classNamePrefix="Select"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-half">
+                    <div className="input-group input-group-icon">
+                      <button>Save</button>
+                      <div className="input-icon">
+                        <i className="fa fa-user">
+                          <FaSave size={"1.6em"} />
+                        </i>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="row"></div>
-        </form>
+              </form>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+        <div className="table-one">
+          <TableQuiz />
+        </div>
       </div>
     </div>
   );
